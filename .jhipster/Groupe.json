@@ -8,10 +8,12 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "appartient",
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "user",
             "otherEntityName": "utilisateur",
-            "otherEntityRelationshipName": "groupe"
+            "otherEntityField": "id",
+            "ownerSide": true
         }
     ],
     "changelogDate": "20190116140449",

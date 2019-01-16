@@ -79,13 +79,14 @@ public class UtilisateurResource {
     /**
      * GET  /utilisateurs : get all the utilisateurs.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of utilisateurs in body
      */
     @GetMapping("/utilisateurs")
     @Timed
-    public List<Utilisateur> getAllUtilisateurs() {
+    public List<Utilisateur> getAllUtilisateurs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Utilisateurs");
-        return utilisateurRepository.findAll();
+        return utilisateurRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -98,7 +99,7 @@ public class UtilisateurResource {
     @Timed
     public ResponseEntity<Utilisateur> getUtilisateur(@PathVariable Long id) {
         log.debug("REST request to get Utilisateur : {}", id);
-        Optional<Utilisateur> utilisateur = utilisateurRepository.findById(id);
+        Optional<Utilisateur> utilisateur = utilisateurRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(utilisateur);
     }
 

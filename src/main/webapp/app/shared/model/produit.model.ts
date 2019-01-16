@@ -1,4 +1,3 @@
-import { Moment } from 'moment';
 import { IUtilisateur } from 'app/shared/model//utilisateur.model';
 import { IFournisseur } from 'app/shared/model//fournisseur.model';
 
@@ -8,7 +7,7 @@ export interface IProduit {
     quantite?: string;
     lieu?: string;
     nom?: string;
-    mm?: Moment;
+    mm?: string;
     risque?: string;
     molecule?: string;
     users?: IUtilisateur[];
@@ -22,7 +21,7 @@ export class Produit implements IProduit {
         public quantite?: string,
         public lieu?: string,
         public nom?: string,
-        public mm?: Moment,
+        public mm?: string,
         public risque?: string,
         public molecule?: string,
         public users?: IUtilisateur[],

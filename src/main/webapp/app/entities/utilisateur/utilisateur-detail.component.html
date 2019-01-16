@@ -13,11 +13,17 @@
                 <dd>
                     <span>{{utilisateur.userName}}</span>
                 </dd>
-                <dt><span jhiTranslate="demo2App.utilisateur.groupe">Groupe</span></dt>
+                <dt><span jhiTranslate="demo2App.utilisateur.user">User</span></dt>
                 <dd>
-                    <div *ngIf="utilisateur.groupe">
-                        <a [routerLink]="['/groupe', utilisateur.groupe?.id, 'view']">{{utilisateur.groupe?.id}}</a>
-                    </div>
+                    <span *ngFor="let user of utilisateur.users; let last = last">
+                        <a [routerLink]="['/groupe', user?.id, 'view' ]">{{user.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="demo2App.utilisateur.enprunter">Enprunter</span></dt>
+                <dd>
+                    <span *ngFor="let enprunter of utilisateur.enprunters; let last = last">
+                        <a [routerLink]="['/produit', enprunter?.id, 'view' ]">{{enprunter.user}}</a>{{last ? '' : ', '}}
+                    </span>
                 </dd>
             </dl>
 

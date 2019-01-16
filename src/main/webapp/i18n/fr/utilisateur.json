@@ -17,7 +17,8 @@
             },
             "idUser": "Id User",
             "userName": "User Name",
-            "groupe": "Groupe"
+            "user": "User",
+            "enprunter": "Enprunter"
         }
     }
 }

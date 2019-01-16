@@ -12,10 +12,20 @@
     ],
     "relationships": [
         {
-            "relationshipName": "groupe",
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "user",
             "otherEntityName": "groupe",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "enprunter",
+            "otherEntityName": "produit",
+            "otherEntityField": "user",
+            "ownerSide": true
         }
     ],
     "changelogDate": "20190116140448",

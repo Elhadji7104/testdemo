@@ -9,6 +9,12 @@
                 <dd>
                     <span>{{groupe.groupeName}}</span>
                 </dd>
+                <dt><span jhiTranslate="demo2App.groupe.user">User</span></dt>
+                <dd>
+                    <span *ngFor="let user of groupe.users; let last = last">
+                        <a [routerLink]="['/utilisateur', user?.id, 'view' ]">{{user.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"

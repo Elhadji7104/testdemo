@@ -19,22 +19,27 @@ entity Produit {
 	quantite String,
 	lieu String,
 	nom String,
-	mm Instant,
+	mm String,
 	risque String,
 	molecule String
 }
 
-relationship OneToMany  {
-	Groupe{appartient(Utilisateur)} to Utilisateur
+relationship ManyToMany  {
+	Groupe{user} to Utilisateur
 }
 
+relationship ManyToMany  {
+	Utilisateur{user} to Groupe
+}
 relationship ManyToMany  {
 	Produit{user} to Utilisateur
 }
 relationship ManyToMany  {
+	Utilisateur{enprunter(user)} to Produit
+}
+relationship ManyToMany  {
 	Produit{achat} to Fournisseur 
 }
-
 relationship ManyToMany  {
 	Fournisseur{achat} to Produit
 }

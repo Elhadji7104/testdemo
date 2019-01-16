@@ -79,13 +79,14 @@ public class GroupeResource {
     /**
      * GET  /groupes : get all the groupes.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of groupes in body
      */
     @GetMapping("/groupes")
     @Timed
-    public List<Groupe> getAllGroupes() {
+    public List<Groupe> getAllGroupes(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Groupes");
-        return groupeRepository.findAll();
+        return groupeRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -98,7 +99,7 @@ public class GroupeResource {
     @Timed
     public ResponseEntity<Groupe> getGroupe(@PathVariable Long id) {
         log.debug("REST request to get Groupe : {}", id);
-        Optional<Groupe> groupe = groupeRepository.findById(id);
+        Optional<Groupe> groupe = groupeRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(groupe);
     }
 

@@ -38,7 +38,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="mm" type="datetime">
+            <column name="mm" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -52,7 +52,6 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="produit" columnName="mm" columnDataType="datetime"/>
         
         <createTable tableName="produit_user">
             <column name="users_id" type="bigint">

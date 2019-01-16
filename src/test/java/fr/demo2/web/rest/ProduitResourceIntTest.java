@@ -25,8 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,8 +57,8 @@ public class ProduitResourceIntTest {
     private static final String DEFAULT_NOM = "AAAAAAAAAA";
     private static final String UPDATED_NOM = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_MM = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_MM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final String DEFAULT_MM = "AAAAAAAAAA";
+    private static final String UPDATED_MM = "BBBBBBBBBB";
 
     private static final String DEFAULT_RISQUE = "AAAAAAAAAA";
     private static final String UPDATED_RISQUE = "BBBBBBBBBB";

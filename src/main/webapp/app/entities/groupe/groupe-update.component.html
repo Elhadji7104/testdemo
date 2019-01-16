@@ -15,6 +15,12 @@
                         [(ngModel)]="groupe.groupeName" />
                 </div>
 
+                <div class="form-group">
+                    <label jhiTranslate="demo2App.groupe.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" multiple name="user" [(ngModel)]="groupe.users">
+                        <option [ngValue]="getSelected(groupe.users, utilisateurOption)" *ngFor="let utilisateurOption of utilisateurs; trackBy: trackUtilisateurById">{{utilisateurOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

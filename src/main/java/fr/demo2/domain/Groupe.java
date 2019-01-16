@@ -1,6 +1,5 @@
 package fr.demo2.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -25,8 +24,12 @@ public class Groupe implements Serializable {
     @Column(name = "groupe_name")
     private String groupeName;
 
-    @OneToMany(mappedBy = "groupe")
-    private Set<Utilisateur> appartients = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "groupe_user",
+               joinColumns = @JoinColumn(name = "groupes_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"))
+    private Set<Utilisateur> users = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -49,29 +52,27 @@ public class Groupe implements Serializable {
         this.groupeName = groupeName;
     }
 
-    public Set<Utilisateur> getAppartients() {
-        return appartients;
+    public Set<Utilisateur> getUsers() {
+        return users;
     }
 
-    public Groupe appartients(Set<Utilisateur> utilisateurs) {
-        this.appartients = utilisateurs;
+    public Groupe users(Set<Utilisateur> utilisateurs) {
+        this.users = utilisateurs;
         return this;
     }
 
-    public Groupe addAppartient(Utilisateur utilisateur) {
-        this.appartients.add(utilisateur);
-        utilisateur.setGroupe(this);
+    public Groupe addUser(Utilisateur utilisateur) {
+        this.users.add(utilisateur);
         return this;
     }
 
-    public Groupe removeAppartient(Utilisateur utilisateur) {
-        this.appartients.remove(utilisateur);
-        utilisateur.setGroupe(null);
+    public Groupe removeUser(Utilisateur utilisateur) {
+        this.users.remove(utilisateur);
         return this;
     }
 
-    public void setAppartients(Set<Utilisateur> utilisateurs) {
-        this.appartients = utilisateurs;
+    public void setUsers(Set<Utilisateur> utilisateurs) {
+        this.users = utilisateurs;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

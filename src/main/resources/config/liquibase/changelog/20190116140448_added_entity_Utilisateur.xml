@@ -30,12 +30,30 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="groupe_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        
+        <createTable tableName="utilisateur_user">
+            <column name="users_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="utilisateurs_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="utilisateurs_id, users_id" tableName="utilisateur_user"/>
+        
+        <createTable tableName="utilisateur_enprunter">
+            <column name="enprunters_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="utilisateurs_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="utilisateurs_id, enprunters_id" tableName="utilisateur_enprunter"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

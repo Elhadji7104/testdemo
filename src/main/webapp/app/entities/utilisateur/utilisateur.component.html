@@ -17,7 +17,8 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="demo2App.utilisateur.idUser">Id User</span></th>
             <th><span jhiTranslate="demo2App.utilisateur.userName">User Name</span></th>
-            <th><span jhiTranslate="demo2App.utilisateur.groupe">Groupe</span></th>
+            <th><span jhiTranslate="demo2App.utilisateur.user">User</span></th>
+            <th><span jhiTranslate="demo2App.utilisateur.enprunter">Enprunter</span></th>
             <th></th>
             </tr>
             </thead>
@@ -27,9 +28,14 @@
                 <td>{{utilisateur.idUser}}</td>
                 <td>{{utilisateur.userName}}</td>
                 <td>
-                    <div *ngIf="utilisateur.groupe">
-                        <a [routerLink]="['../groupe', utilisateur.groupe?.id, 'view' ]" >{{utilisateur.groupe?.id}}</a>
-                    </div>
+                    <span *ngFor="let user of utilisateur.users; let last = last">
+                            <a class="form-control-static" [routerLink]="['../groupe', user?.id, 'view' ]">{{user.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let enprunter of utilisateur.enprunters; let last = last">
+                            <a class="form-control-static" [routerLink]="['../produit', enprunter?.id, 'view' ]">{{enprunter.user}}</a>{{last ? '' : ', '}}
+                        </span>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

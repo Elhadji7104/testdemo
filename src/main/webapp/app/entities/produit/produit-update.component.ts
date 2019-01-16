@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IProduit } from 'app/shared/model/produit.model';
@@ -24,7 +22,6 @@ export class ProduitUpdateComponent implements OnInit {
     utilisateurs: IUtilisateur[];
 
     fournisseurs: IFournisseur[];
-    mm: string;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -38,7 +35,6 @@ export class ProduitUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ produit }) => {
             this.produit = produit;
-            this.mm = this.produit.mm != null ? this.produit.mm.format(DATE_TIME_FORMAT) : null;
         });
         this.utilisateurService.query().subscribe(
             (res: HttpResponse<IUtilisateur[]>) => {
@@ -60,7 +56,6 @@ export class ProduitUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.produit.mm = this.mm != null ? moment(this.mm, DATE_TIME_FORMAT) : null;
         if (this.produit.id !== undefined) {
             this.subscribeToSaveResponse(this.produitService.update(this.produit));
         } else {

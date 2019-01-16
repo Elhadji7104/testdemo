@@ -20,7 +20,7 @@
         },
         {
             "fieldName": "mm",
-            "fieldType": "Instant"
+            "fieldType": "String"
         },
         {
             "fieldName": "risque",

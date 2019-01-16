@@ -1,10 +1,11 @@
 package fr.demo2.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -26,9 +27,17 @@ public class Utilisateur implements Serializable {
     @Column(name = "user_name")
     private String userName;
 
-    @ManyToOne
-    @JsonIgnoreProperties("appartients")
-    private Groupe groupe;
+    @ManyToMany
+    @JoinTable(name = "utilisateur_user",
+               joinColumns = @JoinColumn(name = "utilisateurs_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"))
+    private Set<Groupe> users = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "utilisateur_enprunter",
+               joinColumns = @JoinColumn(name = "utilisateurs_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "enprunters_id", referencedColumnName = "id"))
+    private Set<Produit> enprunters = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -65,17 +74,50 @@ public class Utilisateur implements Serializable {
         this.userName = userName;
     }
 
-    public Groupe getGroupe() {
-        return groupe;
+    public Set<Groupe> getUsers() {
+        return users;
     }
 
-    public Utilisateur groupe(Groupe groupe) {
-        this.groupe = groupe;
+    public Utilisateur users(Set<Groupe> groupes) {
+        this.users = groupes;
         return this;
     }
 
-    public void setGroupe(Groupe groupe) {
-        this.groupe = groupe;
+    public Utilisateur addUser(Groupe groupe) {
+        this.users.add(groupe);
+        return this;
+    }
+
+    public Utilisateur removeUser(Groupe groupe) {
+        this.users.remove(groupe);
+        return this;
+    }
+
+    public void setUsers(Set<Groupe> groupes) {
+        this.users = groupes;
+    }
+
+    public Set<Produit> getEnprunters() {
+        return enprunters;
+    }
+
+    public Utilisateur enprunters(Set<Produit> produits) {
+        this.enprunters = produits;
+        return this;
+    }
+
+    public Utilisateur addEnprunter(Produit produit) {
+        this.enprunters.add(produit);
+        return this;
+    }
+
+    public Utilisateur removeEnprunter(Produit produit) {
+        this.enprunters.remove(produit);
+        return this;
+    }
+
+    public void setEnprunters(Set<Produit> produits) {
+        this.enprunters = produits;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

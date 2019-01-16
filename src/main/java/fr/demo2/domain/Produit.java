@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -40,7 +39,7 @@ public class Produit implements Serializable {
     private String nom;
 
     @Column(name = "mm")
-    private Instant mm;
+    private String mm;
 
     @Column(name = "risque")
     private String risque;
@@ -121,16 +120,16 @@ public class Produit implements Serializable {
         this.nom = nom;
     }
 
-    public Instant getMm() {
+    public String getMm() {
         return mm;
     }
 
-    public Produit mm(Instant mm) {
+    public Produit mm(String mm) {
         this.mm = mm;
         return this;
     }
 
-    public void setMm(Instant mm) {
+    public void setMm(String mm) {
         this.mm = mm;
     }
 
