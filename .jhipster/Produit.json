@@ -1,0 +1,61 @@
+{
+    "name": "Produit",
+    "fields": [
+        {
+            "fieldName": "cas",
+            "javadoc": "The firstname attribute.",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantite",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lieu",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mm",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "risque",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "molecule",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "user",
+            "otherEntityName": "utilisateur",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "achat",
+            "otherEntityName": "fournisseur",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190116140451",
+    "entityTableName": "produit",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

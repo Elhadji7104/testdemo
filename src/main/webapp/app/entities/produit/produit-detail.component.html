@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="produit">
+            <h2><span jhiTranslate="demo2App.produit.detail.title">Produit</span> {{produit.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="demo2App.produit.cas" [ngbTooltip]="'demo2App.produit.help.cas' | translate">Cas</span></dt>
+                <dd>
+                    <span>{{produit.cas}}</span>
+                </dd>
+                <dt><span jhiTranslate="demo2App.produit.quantite">Quantite</span></dt>
+                <dd>
+                    <span>{{produit.quantite}}</span>
+                </dd>
+                <dt><span jhiTranslate="demo2App.produit.lieu">Lieu</span></dt>
+                <dd>
+                    <span>{{produit.lieu}}</span>
+                </dd>
+                <dt><span jhiTranslate="demo2App.produit.nom">Nom</span></dt>
+                <dd>
+                    <span>{{produit.nom}}</span>
+                </dd>
+                <dt><span jhiTranslate="demo2App.produit.mm">Mm</span></dt>
+                <dd>
+                    <span>{{produit.mm}}</span>
+                </dd>
+                <dt><span jhiTranslate="demo2App.produit.risque">Risque</span></dt>
+                <dd>
+                    <span>{{produit.risque}}</span>
+                </dd>
+                <dt><span jhiTranslate="demo2App.produit.molecule">Molecule</span></dt>
+                <dd>
+                    <span>{{produit.molecule}}</span>
+                </dd>
+                <dt><span jhiTranslate="demo2App.produit.user">User</span></dt>
+                <dd>
+                    <span *ngFor="let user of produit.users; let last = last">
+                        <a [routerLink]="['/utilisateur', user?.id, 'view' ]">{{user.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="demo2App.produit.achat">Achat</span></dt>
+                <dd>
+                    <span *ngFor="let achat of produit.achats; let last = last">
+                        <a [routerLink]="['/fournisseur', achat?.id, 'view' ]">{{achat.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/produit', produit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

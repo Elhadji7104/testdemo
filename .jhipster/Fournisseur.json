@@ -1,0 +1,28 @@
+{
+    "name": "Fournisseur",
+    "fields": [
+        {
+            "fieldName": "fournisseurName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "achat",
+            "otherEntityName": "produit",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190116140450",
+    "entityTableName": "fournisseur",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

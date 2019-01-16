@@ -1,0 +1,30 @@
+{
+    "name": "Utilisateur",
+    "fields": [
+        {
+            "fieldName": "idUser",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "groupe",
+            "otherEntityName": "groupe",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190116140448",
+    "entityTableName": "utilisateur",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

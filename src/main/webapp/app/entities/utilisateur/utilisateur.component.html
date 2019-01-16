@@ -1,0 +1,62 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="demo2App.utilisateur.home.title">Utilisateurs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-utilisateur" [routerLink]="['/utilisateur/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="demo2App.utilisateur.home.createLabel">
+            Create new Utilisateur
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="utilisateurs">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="demo2App.utilisateur.idUser">Id User</span></th>
+            <th><span jhiTranslate="demo2App.utilisateur.userName">User Name</span></th>
+            <th><span jhiTranslate="demo2App.utilisateur.groupe">Groupe</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let utilisateur of utilisateurs ;trackBy: trackId">
+                <td><a [routerLink]="['/utilisateur', utilisateur.id, 'view' ]">{{utilisateur.id}}</a></td>
+                <td>{{utilisateur.idUser}}</td>
+                <td>{{utilisateur.userName}}</td>
+                <td>
+                    <div *ngIf="utilisateur.groupe">
+                        <a [routerLink]="['../groupe', utilisateur.groupe?.id, 'view' ]" >{{utilisateur.groupe?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/utilisateur', utilisateur.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/utilisateur', utilisateur.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'utilisateur/'+ utilisateur.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

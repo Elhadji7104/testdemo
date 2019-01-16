@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fournisseur">
+            <h2><span jhiTranslate="demo2App.fournisseur.detail.title">Fournisseur</span> {{fournisseur.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="demo2App.fournisseur.fournisseurName">Fournisseur Name</span></dt>
+                <dd>
+                    <span>{{fournisseur.fournisseurName}}</span>
+                </dd>
+                <dt><span jhiTranslate="demo2App.fournisseur.achat">Achat</span></dt>
+                <dd>
+                    <span *ngFor="let achat of fournisseur.achats; let last = last">
+                        <a [routerLink]="['/produit', achat?.id, 'view' ]">{{achat.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fournisseur', fournisseur.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

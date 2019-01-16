@@ -1,0 +1,26 @@
+{
+    "name": "Groupe",
+    "fields": [
+        {
+            "fieldName": "groupeName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "appartient",
+            "otherEntityName": "utilisateur",
+            "otherEntityRelationshipName": "groupe"
+        }
+    ],
+    "changelogDate": "20190116140449",
+    "entityTableName": "groupe",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
