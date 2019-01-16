@@ -1,0 +1,78 @@
+CREATE SEQUENCE hibernate_sequence MINVALUE 1 MAXVALUE 9223372036854775807 INCREMENT 50 START 1000;
+
+CREATE TABLE jhi_user (
+	id BIGINT NOT NULL,
+	login STRING(50) NOT NULL,
+	password_hash STRING(60) NULL,
+	first_name STRING(50) NULL,
+	last_name STRING(50) NULL,
+	email STRING(254) NULL,
+	image_url STRING(256) NULL,
+	activated BOOL NOT NULL,
+	lang_key STRING(6) NULL,
+	activation_key STRING(20) NULL,
+	reset_key STRING(20) NULL,
+	created_by STRING(50) NOT NULL,
+	created_date TIMESTAMP NOT NULL DEFAULT NULL,
+	reset_date TIMESTAMP NULL,
+	last_modified_by STRING(50) NULL,
+	last_modified_date TIMESTAMP NULL,
+	CONSTRAINT pk_jhi_user PRIMARY KEY (id ASC),
+	UNIQUE INDEX ux_user_email (email ASC),
+	UNIQUE INDEX ux_user_login (login ASC),
+	FAMILY "primary" (id, login, password_hash, first_name, last_name, email, image_url, activated, lang_key, activation_key, reset_key, created_by, created_date, reset_date, last_modified_by, last_modified_date)
+);
+
+CREATE TABLE jhi_authority (
+	"name" STRING(50) NOT NULL,
+	CONSTRAINT pk_jhi_authority PRIMARY KEY ("name" ASC),
+	FAMILY "primary" ("name")
+);
+
+CREATE TABLE jhi_user_authority (
+	user_id BIGINT NOT NULL,
+	authority_name STRING(50) NOT NULL,
+	CONSTRAINT pk_jhi_user_authority PRIMARY KEY (user_id ASC, authority_name ASC),
+	CONSTRAINT fk_authority_name FOREIGN KEY (authority_name) REFERENCES jhi_authority ("name"),
+	INDEX idx_user_authority (authority_name ASC),
+	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES jhi_user (id),
+	FAMILY "primary" (user_id, authority_name)
+) INTERLEAVE IN PARENT jhi_user (user_id);
+
+CREATE TABLE jhi_persistent_audit_event (
+	event_id BIGINT NOT NULL,
+	principal STRING(50) NOT NULL,
+	event_date TIMESTAMP NULL,
+	event_type STRING(255) NULL,
+	CONSTRAINT pk_jhi_persistent_audit_event PRIMARY KEY (event_id ASC),
+	INDEX idx_persistent_audit_event (principal ASC, event_date ASC),
+	FAMILY "primary" (event_id, principal, event_date, event_type)
+);
+
+CREATE TABLE jhi_persistent_audit_evt_data (
+	event_id BIGINT NOT NULL,
+	"name" STRING(150) NOT NULL,
+	value STRING(255) NULL,
+	CONSTRAINT pk_jhi_persistent_audit_evt_data PRIMARY KEY (event_id ASC, "name" ASC),
+	INDEX idx_persistent_audit_evt_data (event_id ASC),
+	CONSTRAINT fk_evt_pers_audit_evt_data FOREIGN KEY (event_id) REFERENCES jhi_persistent_audit_event (event_id),
+	FAMILY "primary" (event_id, "name", value)
+) INTERLEAVE IN PARENT jhi_persistent_audit_event (event_id);
+
+INSERT INTO jhi_authority ("name") VALUES
+('ROLE_ADMIN'),
+('ROLE_USER');
+
+INSERT INTO jhi_user (id, login, password_hash, first_name, last_name, email, image_url, activated, lang_key, activation_key, reset_key, created_by, created_date, reset_date, last_modified_by, last_modified_date) VALUES
+(1, 'system', '$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG', 'System', 'System', 'system@localhost', '', true, 'en', NULL, NULL, 'system', '2018-05-06 19:06:25.609702+00:00', NULL, 'system', NULL),
+(2, 'anonymoususer', '$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO', 'Anonymous', 'User', 'anonymous@localhost', '', true, 'en', NULL, NULL, 'system', '2018-05-06 19:06:25.609702+00:00', NULL, 'system', NULL),
+(3, 'admin', '$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC', 'Administrator', 'Administrator', 'admin@localhost', '', true, 'en', NULL, NULL, 'system', '2018-05-06 19:06:25.609702+00:00', NULL, 'system', NULL),
+(4, 'user', '$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K', 'User', 'User', 'user@localhost', '', true, 'en', NULL, NULL, 'system', '2018-05-06 19:06:25.609702+00:00', NULL, 'system', NULL);
+
+INSERT INTO jhi_user_authority (user_id, authority_name) VALUES
+(1, 'ROLE_ADMIN'),
+(1, 'ROLE_USER'),
+(3, 'ROLE_ADMIN'),
+(3, 'ROLE_USER'),
+(4, 'ROLE_USER');
+
