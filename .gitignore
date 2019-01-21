@@ -3,16 +3,21 @@
 ######################
 /target/www/**
 /src/test/javascript/coverage/
-
+.mvn/
+node/
+webpack/
 ######################
 # Node
 ######################
 
-
-
 npm-debug.log.*
 /.awcache/*
 /.cache-loader/*
+
+######################
+# Node-modules
+######################
+node_modules/
 
 ######################
 # SASS

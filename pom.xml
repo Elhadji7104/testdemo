@@ -16,6 +16,7 @@
 
     <properties>
         <!-- Build properties -->
+        <start-class>fr.demo2.ApplicationWebXml</start-class>
         <maven.version>3.0.0</maven.version>
         <java.version>1.8</java.version>
         <scala.version>2.12.6</scala.version>
